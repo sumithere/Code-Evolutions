@@ -4,7 +4,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 function Home() {
     return (<div style={{display:"flex"}}>
-        <div>Home
+        <div>Home page
         </div>
 
         <Link href="signin" variant="body2">
