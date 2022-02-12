@@ -1,9 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
+import SignUp from "./components/Signup";
 
 function App() {
   return (
-   <h1>hello</h1>
+
+    <div className="App">
+      <SignUp></SignUp>
+    </div>
+
+  
+
   );
 }
 
