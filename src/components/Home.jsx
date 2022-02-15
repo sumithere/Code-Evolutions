@@ -1,8 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState ,useCallback} from 'react';
 import NavBar from './NavBar';
 import Button from '@mui/material/Button';
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd';
+import CodeItem from "./CodeItem";
+import CodeBox from "./CodeBox";
 function Home() {
     const [codeArray, setCodeArray] = useState([]);
+    const movePetListItem = useCallback(
+        (dragIndex, hoverIndex) => {
+            const dragItem = codeArray[dragIndex]
+            const hoverItem = codeArray[hoverIndex]
+            // Swap places of dragItem and hoverItem in the pets array
+            setCodeArray(codeArray => {
+                const updatedPets = [...codeArray]
+                updatedPets[dragIndex] = hoverItem
+                updatedPets[hoverIndex] = dragItem
+                return updatedPets
+            })
+        },
+        [codeArray],
+    )
     useEffect(() => {
         setCodeArray([[`const puppeteer = require("puppeteer"); `,
             `let browser;`,
@@ -21,17 +39,16 @@ function Home() {
             `})`]])
     }, [])
     return (<div className="home" style={{ display: "flex" }}>
+        <DndProvider backend={HTML5Backend}>
         <NavBar>
             <div className="codeIde">
-                <div className="codeToCompile"></div>
+                <div className="codeToCompile">
+                    <CodeBox></CodeBox>
+                </div>
                 <div className="codeToArrange">
                     {codeArray.map((code, index) => {
                         return (
-                            <div className="codeSnippet" id={index}>{code.map((line, index) => {
-                                return (<div className="lineOfCode" id={index}>
-                                    {line}
-                                </div>)
-                            })}</div>
+                            <CodeItem key={index} moveListItem={movePetListItem} index={index} code={code}/>   
                         )
                     })}
                 </div>
@@ -41,6 +58,7 @@ function Home() {
                 </Button>
             </div>
         </NavBar>
+        </DndProvider>
     </div>
     )
 }
