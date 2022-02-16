@@ -17,15 +17,18 @@ function CodeItem({code,index,moveListItem}) {
             const hoverIndex = index
             const hoverBoundingRect = ref.current?.getBoundingClientRect()
             const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
+            const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top ;
+            // console.log(monitor.getClientOffset().y);
+            // console.log(hoverBoundingRect.top);
 
             // if dragging down, continue only when hover is smaller than middle Y
-            if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return
+            if (dragIndex < hoverIndex && hoverActualY+25 < hoverMiddleY) return
             // if dragging up, continue only when hover is bigger than middle Y
             if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
 
             moveListItem(dragIndex, hoverIndex)
             item.index = hoverIndex
+            index=dragIndex;
         },
     })
     const ref = useRef(null);
