@@ -20,7 +20,7 @@ function CodeBox({codeArray,colorArray,setMainArray,setColorArray,movePetListIte
     drop: (item, monitor) => {
       if(monitor.isOver({ shallow: true }) && codeArray.length==0){
         console.log(item.index);
-        changeList(true,item.index,codeArray.length-1);
+        changeList(true,item.index,codeArray.length);
       }
       else{
         console.log(item.index);

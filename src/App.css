@@ -81,3 +81,18 @@ body {
   background-color:lightgreen;
   overflow: auto;
 }
+.profile-container{
+  /* display:inline-block; */
+  text-align: center;
+  overflow: auto/scroll/hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.profile-box{
+  margin:1em;
+  height:10%;
+  width:50%;
+  background-color: aliceblue;
+}
